@@ -9,24 +9,24 @@
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#f07058">
+<meta name="theme-color" content="#8aab28">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --coral: #f07058;
-  --coral-dark: #e05a40;
-  --amber: #f5c020;
-  --green: #6aab4a;
-  --cream: #ede9da;
-  --bg: #fdfaf6;
-  --dark: #2a2420;
-  --text: #3a302a;
-  --muted: #8a7a70;
+  --coral: #8aab28;
+  --coral-dark: #6e8f1e;
+  --amber: #a8c84a;
+  --green: #8aab28;
+  --cream: #e8f2d4;
+  --bg: #f5f9ef;
+  --dark: #1a2808;
+  --text: #283810;
+  --muted: #66784a;
   --card: #ffffff;
-  --border: #ebe3d8;
+  --border: #cfe4a0;
   --px: 20px;
   --py: 24px;
   --gap: 12px;
@@ -90,7 +90,7 @@ html, body {
   background: var(--coral); border-radius: 16px; border: none;
   font-size: 24px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 20px rgba(240,112,88,0.4);
+  box-shadow: 0 6px 20px rgba(138,171,40,0.45);
   flex-shrink: 0; margin-top: 0;
   transition: transform 0.15s;
 }
@@ -153,9 +153,9 @@ html, body {
   padding: 4px 10px; border-radius: 100px;
   white-space: nowrap; flex-shrink: 0;
 }
-.b-red   { background: rgba(240,112,88,0.14); color: var(--coral); }
-.b-amber { background: rgba(245,192,32,0.18); color: #b8900a; }
-.b-green { background: rgba(106,171,74,0.14); color: #4a8a30; }
+.b-red   { background: rgba(138,171,40,0.14); color: var(--coral); }
+.b-amber { background: rgba(138,171,40,0.22); color: #4e6e10; }
+.b-green { background: rgba(138,171,40,0.12); color: #5a8018; }
 
 .clist {
   display: flex; flex-direction: column; gap: var(--gap);
@@ -168,8 +168,8 @@ html, body {
 
 .alert {
   margin: 0 var(--px) var(--gap-lg);
-  background: #fff6f4;
-  border: 1.5px solid rgba(240,112,88,0.22);
+  background: #f2f9e4;
+  border: 1.5px solid rgba(138,171,40,0.30);
   border-radius: var(--r-lg);
   display: flex; align-items: center; gap: 14px;
   padding: 14px 16px; cursor: pointer;
@@ -216,11 +216,11 @@ html, body {
 .rc-tag {
   display: inline-block; font-size: 10px; font-weight: 700;
   padding: 3px 8px; border-radius: 100px;
-  background: rgba(240,112,88,0.12); color: var(--coral);
+  background: rgba(138,171,40,0.14); color: var(--coral);
 }
 
 /* ══ SCAN ══ */
-#s-scan { background: #18120e; padding-bottom: 16px; }
+#s-scan { background: #0a1805; padding-bottom: 16px; }
 .scan-head {
   padding: var(--py) var(--px) 0;
   display: flex; align-items: center; justify-content: space-between;
@@ -234,7 +234,27 @@ html, body {
   display: flex; align-items: center; justify-content: center;
 }
 
-.vf-wrap { padding: 0 var(--px); margin-top: 32px; flex-shrink: 0; }
+/* scan quota bar */
+.scan-quota {
+  margin: 14px var(--px) 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r); padding: 10px 14px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.sq-info { flex: 1; }
+.sq-txt { font-size: 11px; color: rgba(240,232,224,0.6); margin-bottom: 6px; }
+.sq-bar { height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+.sq-fill { height: 100%; background: var(--coral); border-radius: 2px; transition: width 0.4s; }
+.sq-upgrade {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+  color: var(--coral); background: rgba(138,171,40,0.15);
+  border: 1px solid rgba(138,171,40,0.3); border-radius: 100px;
+  padding: 5px 11px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+}
+
+.vf-wrap { padding: 0 var(--px); margin-top: 20px; flex-shrink: 0; }
 .vf {
   width: 100%; aspect-ratio: 1;
   background: rgba(255,255,255,0.04);
@@ -243,6 +263,35 @@ html, body {
   display: flex; align-items: center; justify-content: center;
 }
 .vf-ph { font-size: 60px; opacity: 0.2; }
+.vf-cam {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  display: none;
+}
+.vf-cam.on { display: block; }
+.vf-err {
+  position: absolute; inset: 0;
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  text-align: center; padding: 20px;
+}
+.vf-err.on { display: flex; }
+.vf-err-ico { font-size: 36px; opacity: 0.4; }
+.vf-err-txt { font-size: 12px; color: rgba(240,232,224,0.45); line-height: 1.5; }
+.vf-detected {
+  position: absolute; inset: 0;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(138,171,40,0.18);
+  border-radius: var(--r-lg);
+}
+.vf-detected.on { display: flex; }
+.vf-detected-ring {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 3px solid var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  animation: pop 0.3s cubic-bezier(0.34,1.4,0.64,1);
+}
+@keyframes pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .vf-line {
   position: absolute; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg,transparent,var(--coral),transparent);
@@ -276,7 +325,7 @@ html, body {
   display: flex; align-items: center; gap: 10px;
   cursor: pointer; transition: background 0.15s;
 }
-.chip:active { background: rgba(240,112,88,0.2); border-color: var(--coral); }
+.chip:active { background: rgba(138,171,40,0.2); border-color: var(--coral); }
 .chip-i { font-size: 20px; }
 .chip-n { font-size: 12px; font-weight: 600; color: rgba(240,232,224,0.9); }
 .chip-c { font-size: 10px; color: rgba(240,232,224,0.35); font-family: monospace; margin-top: 2px; }
@@ -302,7 +351,7 @@ html, body {
 .sh-brand { font-size: 12px; color: var(--muted); margin-top: 3px; }
 .sh-pill {
   display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(245,192,32,0.16); color: #b8900a;
+  background: rgba(138,171,40,0.16); color: #4e6e10;
   font-size: 12px; font-weight: 700;
   padding: 6px 14px; border-radius: 100px;
   margin-bottom: 20px;
@@ -333,7 +382,7 @@ html, body {
 /* ══ RECIPES ══ */
 .ai-crd {
   margin: 0 var(--px) var(--gap-lg);
-  background: linear-gradient(135deg,#2a2420,#3d3028);
+  background: linear-gradient(135deg,#0e2005,#1e3a0a);
   border-radius: var(--r-lg); padding: 18px;
   display: flex; align-items: center; gap: 14px;
   cursor: pointer; flex-shrink: 0;
@@ -359,13 +408,30 @@ html, body {
 .rrow-meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
 .rrow-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tg { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 100px; }
-.tg-c { background: rgba(240,112,88,0.12); color: var(--coral); }
-.tg-g { background: rgba(106,171,74,0.12); color: #4a8a30; }
-.tg-a { background: rgba(245,192,32,0.16); color: #b8900a; }
+.tg-c { background: rgba(138,171,40,0.14); color: var(--coral); }
+.tg-g { background: rgba(138,171,40,0.10); color: #5a8018; }
+.tg-a { background: rgba(138,171,40,0.20); color: #4e6e10; }
+
+/* locked recipe rows */
+.rrow.locked { position: relative; cursor: pointer; }
+.rrow.locked .rrow-body,
+.rrow.locked .rrow-img { filter: blur(4px); user-select: none; pointer-events: none; }
+.lock-ov {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(245,249,239,0.72);
+}
+.lock-ov-icon { font-size: 16px; }
+.lock-ov-lbl { font-size: 12px; font-weight: 700; color: var(--dark); }
+.lock-ov-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  background: var(--coral); color: #fff;
+  padding: 3px 8px; border-radius: 100px; text-transform: uppercase;
+}
 
 /* ══ PROFILE ══ */
 .pro-hero {
-  background: linear-gradient(160deg,#2a2420,#3d3028);
+  background: linear-gradient(160deg,#0e2005,#1e3a0a);
   padding: var(--py) var(--px) 44px;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   flex-shrink: 0;
@@ -374,7 +440,7 @@ html, body {
   width: 68px; height: 68px; background: var(--coral); border-radius: 20px;
   display: flex; align-items: center; justify-content: center;
   font-family:'DM Serif Display',serif; font-size: 32px; color: #fff;
-  box-shadow: 0 8px 24px rgba(240,112,88,0.35);
+  box-shadow: 0 8px 24px rgba(138,171,40,0.40);
 }
 .pro-name { font-family:'DM Serif Display',serif; font-size: 22px; color: #f0e8e0; }
 .pro-since { font-size: 12px; color: rgba(240,232,224,0.4); letter-spacing: 0.06em; }
@@ -391,6 +457,25 @@ html, body {
 .stn { font-family:'DM Serif Display',serif; font-size: 26px; color: var(--dark); line-height: 1; margin-bottom: 4px; }
 .stn sup { font-size: 13px; color: var(--coral); }
 .stl { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* subscription card in profile */
+.sub-card {
+  margin: 0 var(--px) var(--gap-lg);
+  border-radius: var(--r-lg); padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+  flex-shrink: 0; cursor: pointer;
+}
+.sub-card.free { background: linear-gradient(135deg,#0e2005,#2a5010); }
+.sub-card.pro  { background: linear-gradient(135deg,#1a4208,#2e6010); cursor: default; }
+.sub-ic { font-size: 26px; }
+.sub-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 3px; }
+.sub-ttl { font-size: 14px; font-weight: 700; color: #f0e8e0; }
+.sub-arr { margin-left: auto; font-size: 20px; color: var(--amber); }
+.sub-pro-badge {
+  margin-left: auto; background: var(--coral); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 100px;
+}
 
 .pro-sec { padding: 0 var(--px) var(--gap-lg); flex-shrink: 0; }
 .pro-sec-ttl {
@@ -415,7 +500,7 @@ html, body {
 
 .ai-ov {
   position: absolute; inset: 0;
-  background: rgba(253,250,246,0.95);
+  background: rgba(245,249,239,0.96);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 18px;
   z-index: 100; opacity: 0; pointer-events: none;
@@ -430,6 +515,79 @@ html, body {
 @keyframes spin { to { transform: rotate(360deg); } }
 .ov-ttl { font-family:'DM Serif Display',serif; font-size: 22px; color: var(--dark); }
 .ov-sub { font-size: 13px; color: var(--muted); max-width: 200px; text-align: center; line-height: 1.5; }
+
+/* ══ PAYWALL ══ */
+.paywall {
+  position: absolute; inset: 0;
+  background: rgba(10,24,5,0.55);
+  z-index: 150; opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  display: flex; align-items: flex-end;
+}
+.paywall.on { opacity: 1; pointer-events: all; }
+.pw-sheet {
+  width: 100%;
+  background: var(--card);
+  border-radius: 28px 28px 0 0;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.34,1.15,0.64,1);
+}
+.paywall.on .pw-sheet { transform: translateY(0); }
+.pw-hero {
+  background: linear-gradient(160deg,#0e2005,#2a5010);
+  padding: 24px var(--px) 28px;
+  text-align: center; position: relative;
+}
+.pw-close {
+  position: absolute; top: 14px; right: 16px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: none;
+  color: rgba(255,255,255,0.65); font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.pw-icon { font-size: 42px; margin-bottom: 10px; }
+.pw-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 5px;
+}
+.pw-title { font-family:'DM Serif Display',serif; font-size: 26px; color: #fff; margin-bottom: 5px; }
+.pw-subtitle { font-size: 13px; color: rgba(255,255,255,0.5); }
+.pw-body { padding: 22px var(--px) 32px; }
+.pw-perks { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+.pw-perk { display: flex; align-items: center; gap: 12px; }
+.pw-perk-ic {
+  width: 36px; height: 36px; border-radius: 11px;
+  background: rgba(138,171,40,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.pw-perk-body { flex: 1; }
+.pw-perk-txt { font-size: 13px; font-weight: 600; color: var(--dark); }
+.pw-perk-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.pw-price {
+  background: var(--bg); border-radius: var(--r);
+  padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.pw-price-lbl { font-size: 12px; color: var(--muted); }
+.pw-price-val { display: flex; align-items: baseline; gap: 4px; }
+.pw-price-amt { font-family:'DM Serif Display',serif; font-size: 22px; color: var(--dark); }
+.pw-price-per { font-size: 12px; color: var(--muted); }
+.pw-cta {
+  width: 100%; background: var(--coral); color: #fff;
+  font-family:'Lora',serif; font-size: 15px; font-weight: 700;
+  padding: 16px; border-radius: var(--r); border: none; cursor: pointer;
+  margin-bottom: 10px; transition: background 0.15s;
+}
+.pw-cta:active { background: var(--coral-dark); }
+.pw-restore {
+  display: block; width: 100%; text-align: center;
+  font-size: 12px; color: var(--muted);
+  background: none; border: none; cursor: pointer; padding: 4px;
+  font-family:'Lora',serif;
+}
 </style>
 </head>
 <body>
@@ -445,6 +603,53 @@ html, body {
     <div class="spinner"></div>
     <div class="ov-ttl">Thinking...</div>
     <div class="ov-sub">Scanning your pantry for the best recipes</div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="paywall" id="paywall" onclick="paywallBgClick(event)">
+    <div class="pw-sheet">
+      <div class="pw-hero">
+        <button class="pw-close" onclick="closePaywall()">✕</button>
+        <div class="pw-icon">🌿</div>
+        <div class="pw-eyebrow">Scan2Cook Pro</div>
+        <div class="pw-title">Cook without limits</div>
+        <div class="pw-subtitle">Upgrade to unlock everything</div>
+      </div>
+      <div class="pw-body">
+        <div class="pw-perks">
+          <div class="pw-perk">
+            <div class="pw-perk-ic">📷</div>
+            <div class="pw-perk-body">
+              <div class="pw-perk-txt">Unlimited Scans</div>
+              <div class="pw-perk-sub">Scan as many items as you like</div>
+            </div>
+          </div>
+          <div class="pw-perk">
+            <div class="pw-perk-ic">🍳</div>
+            <div class="pw-perk-body">
+              <div class="pw-perk-txt">All Recipes Unlocked</div>
+              <div class="pw-perk-sub">Access every recipe in your pantry</div>
+            </div>
+          </div>
+          <div class="pw-perk">
+            <div class="pw-perk-ic">🧠</div>
+            <div class="pw-perk-body">
+              <div class="pw-perk-txt">AI Recipe Generation</div>
+              <div class="pw-perk-sub">Create custom recipes from your items</div>
+            </div>
+          </div>
+        </div>
+        <div class="pw-price">
+          <div class="pw-price-lbl">Monthly plan</div>
+          <div class="pw-price-val">
+            <span class="pw-price-amt">$4.99</span>
+            <span class="pw-price-per">/ month</span>
+          </div>
+        </div>
+        <button class="pw-cta" onclick="subscribe()">Start Free Trial</button>
+        <button class="pw-restore" onclick="closePaywall()">Restore Purchase</button>
+      </div>
+    </div>
   </div>
 
   <!-- HOME -->
@@ -483,16 +688,30 @@ html, body {
   </div>
 
   <!-- SCAN -->
-  <div class="scr" id="s-scan" style="background:#18120e">
+  <div class="scr" id="s-scan" style="background:#0a1805">
     <div class="scan-head">
       <div class="scan-ttl">Scan Item</div>
       <button class="scan-x" onclick="go('home')">✕</button>
     </div>
 
+    <div class="scan-quota" id="scan-quota">
+      <div class="sq-info">
+        <div class="sq-txt" id="sq-txt">3 of 3 free scans remaining</div>
+        <div class="sq-bar"><div class="sq-fill" id="sq-fill" style="width:100%"></div></div>
+      </div>
+      <button class="sq-upgrade" onclick="openPaywall('scan-limit')">Upgrade</button>
+    </div>
+
     <div class="vf-wrap">
       <div class="vf">
-        <span class="vf-ph">📦</span>
-        <div class="vf-line"></div>
+        <video id="camera-feed" class="vf-cam" autoplay playsinline muted></video>
+        <span class="vf-ph" id="vf-ph">📷</span>
+        <div class="vf-err" id="vf-err">
+          <span class="vf-err-ico">🚫</span>
+          <span class="vf-err-txt">Camera access denied.<br>Use the shortcuts below.</span>
+        </div>
+        <div class="vf-detected" id="vf-detected"><div class="vf-detected-ring" id="vf-detected-ring">✓</div></div>
+        <div class="vf-line" id="vf-line"></div>
         <div class="vfc tl"></div><div class="vfc tr"></div>
         <div class="vfc bl"></div><div class="vfc br"></div>
       </div>
@@ -558,7 +777,7 @@ html, body {
       <div class="pg-sub">Based on your pantry</div>
     </div>
 
-    <div class="ai-crd" onclick="trigAI()">
+    <div class="ai-crd" id="ai-crd" onclick="trigAI()">
       <span class="ai-icon">🧠</span>
       <div><div class="ai-lbl">AI Powered</div><div class="ai-txt">Generate recipes from my pantry</div></div>
       <span class="ai-arr">›</span>
@@ -568,9 +787,9 @@ html, body {
     <div class="rlist">
       <div class="rrow"><div class="rrow-img t">🍅</div><div class="rrow-body"><div class="rrow-name">Tomato & Egg Stir Fry</div><div class="rrow-meta">⏱ 15 min · 2 servings</div><div class="rrow-tags"><span class="tg tg-c">Uses expiring</span><span class="tg tg-g">Easy</span></div></div></div>
       <div class="rrow"><div class="rrow-img c">🧀</div><div class="rrow-body"><div class="rrow-name">Cheesy Omelette</div><div class="rrow-meta">⏱ 10 min · 1 serving</div><div class="rrow-tags"><span class="tg tg-c">Uses expiring</span><span class="tg tg-g">Easy</span></div></div></div>
-      <div class="rrow"><div class="rrow-img m">🥛</div><div class="rrow-body"><div class="rrow-name">Creamy Pasta Bake</div><div class="rrow-meta">⏱ 30 min · 4 servings</div><div class="rrow-tags"><span class="tg tg-a">Medium</span><span class="tg tg-g">Vegetarian</span></div></div></div>
-      <div class="rrow"><div class="rrow-img e">🥚</div><div class="rrow-body"><div class="rrow-name">Shakshuka</div><div class="rrow-meta">⏱ 25 min · 2 servings</div><div class="rrow-tags"><span class="tg tg-a">Medium</span><span class="tg tg-g">Vegetarian</span></div></div></div>
-      <div class="rrow"><div class="rrow-img k">🍗</div><div class="rrow-body"><div class="rrow-name">Chicken Tomato Pasta</div><div class="rrow-meta">⏱ 35 min · 3 servings</div><div class="rrow-tags"><span class="tg tg-c">Uses expiring</span><span class="tg tg-a">Medium</span></div></div></div>
+      <div class="rrow locked" onclick="openPaywall('recipes')"><div class="rrow-img m">🥛</div><div class="rrow-body"><div class="rrow-name">Creamy Pasta Bake</div><div class="rrow-meta">⏱ 30 min · 4 servings</div><div class="rrow-tags"><span class="tg tg-a">Medium</span><span class="tg tg-g">Vegetarian</span></div></div><div class="lock-ov"><span class="lock-ov-icon">🔒</span><span class="lock-ov-lbl">Unlock recipe</span><span class="lock-ov-badge">Pro</span></div></div>
+      <div class="rrow locked" onclick="openPaywall('recipes')"><div class="rrow-img e">🥚</div><div class="rrow-body"><div class="rrow-name">Shakshuka</div><div class="rrow-meta">⏱ 25 min · 2 servings</div><div class="rrow-tags"><span class="tg tg-a">Medium</span><span class="tg tg-g">Vegetarian</span></div></div><div class="lock-ov"><span class="lock-ov-icon">🔒</span><span class="lock-ov-lbl">Unlock recipe</span><span class="lock-ov-badge">Pro</span></div></div>
+      <div class="rrow locked" onclick="openPaywall('recipes')"><div class="rrow-img k">🍗</div><div class="rrow-body"><div class="rrow-name">Chicken Tomato Pasta</div><div class="rrow-meta">⏱ 35 min · 3 servings</div><div class="rrow-tags"><span class="tg tg-c">Uses expiring</span><span class="tg tg-a">Medium</span></div></div><div class="lock-ov"><span class="lock-ov-icon">🔒</span><span class="lock-ov-lbl">Unlock recipe</span><span class="lock-ov-badge">Pro</span></div></div>
     </div>
   </div>
 
@@ -579,13 +798,22 @@ html, body {
     <div class="pro-hero">
       <div class="pro-av">M</div>
       <div class="pro-name">Minh An</div>
-      <div class="pro-since">Member since 2026</div>
+      <div class="pro-since" id="pro-since">Free plan</div>
     </div>
 
     <div class="stats">
       <div class="st"><div class="stn">47<sup>+</sup></div><div class="stl">Scanned</div></div>
       <div class="st"><div class="stn">12</div><div class="stl">Cooked</div></div>
       <div class="st"><div class="stn">0<sup>%</sup></div><div class="stl">Wasted</div></div>
+    </div>
+
+    <div class="sub-card free" id="sub-card" onclick="openPaywall('profile')">
+      <span class="sub-ic">🌿</span>
+      <div>
+        <div class="sub-lbl" id="sub-lbl">Free Plan</div>
+        <div class="sub-ttl" id="sub-ttl">Upgrade to Pro</div>
+      </div>
+      <span class="sub-arr" id="sub-arr">›</span>
     </div>
 
     <div class="pro-sec">
@@ -617,6 +845,14 @@ html, body {
 
 </div>
 <script>
+const SCAN_LIMIT = 3;
+let isPro = false;
+let scansLeft = SCAN_LIMIT;
+let cameraStream = null;
+let detectionRaf = null;
+let barcodeDetector = null;
+let lastDetected = null;
+
 const scanDB = {
   milk:   {icon:'🥛',name:'Whole Milk',      brand:'Meadow Fresh · 2L',      exp:'⏰ Expires Today'},
   eggs:   {icon:'🥚',name:'Free Range Eggs', brand:'Happy Hens · 12pk',      exp:'⏰ Expires in 2 weeks'},
@@ -631,20 +867,151 @@ function go(s) {
   document.getElementById('s-' + s).classList.add('on');
   const nb = document.getElementById('nb-' + s);
   if (nb) nb.classList.add('active');
-  if (s !== 'scan') document.getElementById('sheet').classList.remove('open');
+  if (s === 'scan') {
+    startCamera();
+  } else {
+    stopCamera();
+    document.getElementById('sheet').classList.remove('open');
+  }
 }
 
+/* ── Camera ── */
+async function startCamera() {
+  if (cameraStream) return;
+  const video  = document.getElementById('camera-feed');
+  const ph     = document.getElementById('vf-ph');
+  const errEl  = document.getElementById('vf-err');
+  const line   = document.getElementById('vf-line');
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false,
+    });
+    cameraStream = stream;
+    video.srcObject = stream;
+    await video.play();
+    video.classList.add('on');
+    ph.style.display = 'none';
+    line.style.display = 'block';
+    errEl.classList.remove('on');
+    startBarcodeDetection(video);
+  } catch (err) {
+    ph.style.display = 'none';
+    errEl.classList.add('on');
+    line.style.display = 'none';
+  }
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(t => t.stop());
+    cameraStream = null;
+  }
+  cancelAnimationFrame(detectionRaf);
+  detectionRaf = null;
+  lastDetected = null;
+  const video = document.getElementById('camera-feed');
+  video.srcObject = null;
+  video.classList.remove('on');
+  document.getElementById('vf-ph').style.display = '';
+  document.getElementById('vf-line').style.display = '';
+  document.getElementById('vf-err').classList.remove('on');
+  document.getElementById('vf-detected').classList.remove('on');
+}
+
+/* ── Barcode detection ── */
+async function startBarcodeDetection(video) {
+  if (!('BarcodeDetector' in window)) return;
+  try {
+    const supported = await BarcodeDetector.getSupportedFormats();
+    const formats = ['ean_13','ean_8','code_128','code_39','qr_code','upc_a','upc_e']
+      .filter(f => supported.includes(f));
+    barcodeDetector = new BarcodeDetector({ formats: formats.length ? formats : supported });
+    detectFrame(video);
+  } catch (e) {}
+}
+
+async function detectFrame(video) {
+  if (!barcodeDetector || !cameraStream) return;
+  try {
+    const results = await barcodeDetector.detect(video);
+    if (results.length > 0) {
+      const code = results[0].rawValue;
+      if (code !== lastDetected) {
+        lastDetected = code;
+        onBarcodeDetected(code);
+        return;
+      }
+    }
+  } catch (e) {}
+  detectionRaf = requestAnimationFrame(() => detectFrame(video));
+}
+
+function onBarcodeDetected(code) {
+  cancelAnimationFrame(detectionRaf);
+  detectionRaf = null;
+
+  const match = Object.values(scanDB).find(p => p.barcode === code);
+  const product = match || { icon:'📦', name:'Scanned Product', brand:`Barcode: ${code}`, exp:'⏰ Check expiry date' };
+
+  const ring = document.getElementById('vf-detected-ring');
+  ring.textContent = match ? match.icon : '✓';
+  document.getElementById('vf-detected').classList.add('on');
+
+  setTimeout(() => {
+    document.getElementById('vf-detected').classList.remove('on');
+    if (!isPro && scansLeft <= 0) { openPaywall('scan-limit'); resumeDetection(); return; }
+    if (!isPro) { scansLeft--; updateScanQuota(); }
+    document.getElementById('sh-icon').textContent  = product.icon;
+    document.getElementById('sh-name').textContent  = product.name;
+    document.getElementById('sh-brand').textContent = product.brand;
+    document.getElementById('sh-exp').textContent   = product.exp;
+    document.getElementById('sheet').classList.add('open');
+  }, 700);
+}
+
+function resumeDetection() {
+  lastDetected = null;
+  const video = document.getElementById('camera-feed');
+  if (cameraStream && barcodeDetector) detectFrame(video);
+}
+
+/* ── Quota ── */
+function updateScanQuota() {
+  const quota = document.getElementById('scan-quota');
+  const txt   = document.getElementById('sq-txt');
+  const fill  = document.getElementById('sq-fill');
+  if (isPro) { quota.style.display = 'none'; return; }
+  quota.style.display = 'flex';
+  txt.textContent = scansLeft > 0
+    ? `${scansLeft} of ${SCAN_LIMIT} free scan${scansLeft === 1 ? '' : 's'} remaining`
+    : 'No free scans left — upgrade for unlimited';
+  fill.style.width = (scansLeft / SCAN_LIMIT * 100) + '%';
+  fill.style.background = scansLeft === 0 ? 'rgba(255,255,255,0.2)' : 'var(--coral)';
+}
+
+/* ── Manual chip scan (demo shortcuts) ── */
 function doScan(k) {
+  if (!isPro && scansLeft <= 0) { openPaywall('scan-limit'); return; }
+  if (!isPro) { scansLeft--; updateScanQuota(); }
   const d = scanDB[k];
-  document.getElementById('sh-icon').textContent  = d.icon;
-  document.getElementById('sh-name').textContent  = d.name;
-  document.getElementById('sh-brand').textContent = d.brand;
-  document.getElementById('sh-exp').textContent   = d.exp;
-  document.getElementById('sheet').classList.add('open');
+  const ring = document.getElementById('vf-detected-ring');
+  ring.textContent = d.icon;
+  document.getElementById('vf-detected').classList.add('on');
+  setTimeout(() => {
+    document.getElementById('vf-detected').classList.remove('on');
+    document.getElementById('sh-icon').textContent  = d.icon;
+    document.getElementById('sh-name').textContent  = d.name;
+    document.getElementById('sh-brand').textContent = d.brand;
+    document.getElementById('sh-exp').textContent   = d.exp;
+    document.getElementById('sheet').classList.add('open');
+  }, 500);
 }
 
 function addItem() {
   document.getElementById('sheet').classList.remove('open');
+  resumeDetection();
   go('home');
   showToast('✓ Item added to pantry');
 }
@@ -667,10 +1034,52 @@ function filt(btn, cat) {
 }
 
 function trigAI() {
+  if (!isPro) { openPaywall('ai'); return; }
   const ov = document.getElementById('ai-ov');
   ov.classList.add('on');
   setTimeout(() => { ov.classList.remove('on'); showToast('✨ 5 new recipes generated!'); }, 2400);
 }
+
+function openPaywall() {
+  document.getElementById('paywall').classList.add('on');
+}
+
+function closePaywall() {
+  document.getElementById('paywall').classList.remove('on');
+}
+
+function paywallBgClick(e) {
+  if (e.target === document.getElementById('paywall')) closePaywall();
+}
+
+function subscribe() {
+  isPro = true;
+  closePaywall();
+  updateScanQuota();
+
+  document.querySelectorAll('.rrow.locked').forEach(r => {
+    r.classList.remove('locked');
+    r.onclick = null;
+    const ov = r.querySelector('.lock-ov');
+    if (ov) ov.remove();
+  });
+
+  const aiLbl = document.querySelector('#ai-crd .ai-lbl');
+  if (aiLbl) aiLbl.textContent = 'AI Powered · Pro';
+
+  const card = document.getElementById('sub-card');
+  card.classList.replace('free', 'pro');
+  card.onclick = null;
+  document.getElementById('sub-lbl').textContent = 'Active Plan';
+  document.getElementById('sub-ttl').textContent = 'Scan2Cook Pro';
+  const arr = document.getElementById('sub-arr');
+  arr.outerHTML = '<span class="sub-pro-badge">Active</span>';
+  document.getElementById('pro-since').textContent = 'Pro member since 2026';
+
+  showToast('🎉 Welcome to Pro! Enjoy unlimited access.');
+}
+
+updateScanQuota();
 </script>
 </body>
 </html>
